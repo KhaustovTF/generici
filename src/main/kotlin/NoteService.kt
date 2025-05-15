@@ -27,8 +27,17 @@ object NoteService {
         }
     }
 
-    fun get(ownerId: Int){
-
+    fun getNotesByOwner(ownerId: Int){
+        var isFind = false
+        for (note in notes.values) {
+            if (note.ownerId == ownerId) {
+                println(note)
+                isFind = true
+            }
+        }
+        if (!isFind){
+            throw NoteNotFoundException("netu")
+        }
     }
 
     //////////////////////////////////////
@@ -66,6 +75,17 @@ object NoteService {
             throw NoteNotFoundException("Comment with id: $commentId is not found")
         } else {
             comments[commentId]!!.isAccess = !comments[commentId]!!.isAccess
+        }
+    }
+
+    fun getCommentByNote(noteId: Int){
+        if (noteId !in notes){
+            throw NoteNotFoundException("note with id: $noteId is not found")
+        }else{
+            for (comment in comments.values){
+                if (comment.noteId == noteId)
+                    println(comment)
+            }
         }
     }
 

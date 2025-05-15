@@ -2,11 +2,12 @@ import NoteService.getNotes
 
 fun main() {
     NoteService.add(Note(NoteService.getUnickId(), 1, "How to cook for noobs", "blabalbalbalbalablablablabal"))
-    NoteService.add(Note(2, 1, "How to cook for pros", "lalalalalalalalalal"))
-    NoteService.add(Note(3, 2, "How to cook for pros", "lalalalalalalalalal"))
+    NoteService.add(Note(NoteService.getUnickId(), 1, "How to cook for pros", "lalalalalalalalalal"))
+    NoteService.add(Note(NoteService.getUnickId(), 2, "How to cook for pros", "lalalalalalalalalal"))
+    NoteService.add(Note(NoteService.getUnickId(), 2, "asdasdasdasdas", "qweqweqweqweqweqwe"))
 
     try {
-        NoteService.editNote(1, Note(2, 1, "no longer how to cook", "__________"))
+        NoteService.editNote(1, Note(1, 1, "no longer how to cook", "__________"))
     } catch (e: NoteNotFoundException) {
         println(e.message)
     }
@@ -54,6 +55,8 @@ fun main() {
 
     storageNote.setAllData(getNotes())
     storageNote.get(1)
-
+    println("////////////////////////////////////////////////////////////////////////////////////////////////////////")
+    NoteService.getNotesByOwner(2)
+    NoteService.getCommentByNote(1)
 }
 

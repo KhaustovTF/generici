@@ -15,4 +15,6 @@ class Storage<T> {
 
     fun get(id: Int): T? = allData[id]
 
+
+
 }
