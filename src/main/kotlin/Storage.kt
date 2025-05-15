@@ -9,6 +9,10 @@ class Storage<T> {
         return item
     }
 
-    fun getById(id: Int): T? = allData[id]
+    fun setAllData(data: MutableMap<Int, T>){
+        allData = data
+    }
+
+    fun get(id: Int): T? = allData[id]
 
 }

@@ -8,6 +8,10 @@ object NoteService {
     fun getUnickId() = unickId
     fun getCommentUnickId() = commentUnickId
 
+    fun getNotes(): MutableMap<Int, Note> {
+        return notes
+    }
+
     fun add(note: Note): Note {
         notes[note.noteId] = note
         unickId++
@@ -57,11 +61,11 @@ object NoteService {
         }
     }
 
-    fun deleteComment(commentId: Int){
+    fun deleteOrRestoreComment(commentId: Int){
         if (commentId !in comments) {
             throw NoteNotFoundException("Comment with id: $commentId is not found")
         } else {
-            comments.remove(commentId)
+            comments[commentId]!!.isAccess = !comments[commentId]!!.isAccess
         }
     }
 
@@ -70,7 +74,7 @@ object NoteService {
         if (noteId !in notes) {
             throw NoteNotFoundException("note with id: $noteId is not found")
         }else{
-                println(notes[noteId])
+            println(notes[noteId])
         }
     }
 
@@ -79,7 +83,8 @@ object NoteService {
         for (note in notes) {
             println(note)
         }
-        for (comment in comments) {
+        for (comment in comments.values) {
+            if (comment.isAccess)
             println(comment)
         }
     }
